@@ -57,6 +57,31 @@ from PIL import Image
 from streamlit_drawable_canvas import st_canvas, CanvasResult
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Compat shim: streamlit-drawable-canvas 0.9.3 calls
+# streamlit.elements.image.image_to_url(image, width, ...), but Streamlit ≥1.31
+# removed that symbol (it now lives in streamlit.elements.lib.image_utils with a
+# LayoutConfig replacing the old width arg). Without this shim, the canvas's
+# efficient background_image path raises, which is why the RGB frame used to be
+# embedded as a base64 object and round-tripped ~0.5 MB on every mouse event.
+# Restoring the old entry point lets us pass the image via background_image so it
+# uploads ONCE and is never sent back — the single biggest win against drawing lag.
+import streamlit.elements.image as _st_image_mod
+if not hasattr(_st_image_mod, "image_to_url"):
+    try:
+        from streamlit.elements.lib.image_utils import image_to_url as _new_image_to_url
+        from streamlit.elements.lib.layout_utils import LayoutConfig as _LayoutConfig
+
+        def _image_to_url_compat(image, width, clamp, channels, output_format, image_id):
+            lc = _LayoutConfig(width=width if isinstance(width, int) else None)
+            return _new_image_to_url(image, lc, clamp, channels, output_format, image_id)
+
+        _st_image_mod.image_to_url = _image_to_url_compat
+    except Exception:
+        pass  # Fall back to the (slower) embedded-background path below.
+
+_HAS_BG_URL = hasattr(_st_image_mod, "image_to_url")
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Configuration
 # ─────────────────────────────────────────────────────────────────────────────
 st.set_page_config(layout="wide", page_title="RGB-D-T Annotation Tool v2")
@@ -70,7 +95,7 @@ def find_repo_root(start: str | None = None) -> str:
     """Locate dataset repo root (folder containing Dataset/ or new data/)."""
     cur = os.path.abspath(start or ANNOTATOR_DIR)
     for _ in range(6):
-        for name in ("Test Dataset"):
+        for name in ("Dataset", "data"):   # tuple of candidate names, not a string
             if os.path.isdir(os.path.join(cur, name)):
                 return cur
         parent = os.path.dirname(cur)
@@ -200,7 +225,7 @@ def get_dataset_files(data_dir):
         sp = os.path.join(data_dir, sd)
         if not os.path.isdir(sp): continue
         rgb      = os.path.join(sp, "left_cam",  "left.png")
-        thermal  = os.path.join(sp, "thermal",   "rgb_matched__manual_calibrated_thermal.npy")
+        thermal  = os.path.join(sp, "thermal",   "rgb_matched_thermal.npy")
         depth    = os.path.join(sp, "depth",     "depth.npy")
         metadata = os.path.join(sp, "metadata.json")
         if os.path.exists(rgb) and os.path.exists(thermal) and os.path.exists(depth):
@@ -282,6 +307,12 @@ def norm_colormap(arr, cmap):
          else cv2.normalize(v, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U))
     return cv2.cvtColor(cv2.applyColorMap(n, cmap), cv2.COLOR_BGR2RGB)
 
+@st.cache_data
+def _modality_vis(path, cmap, size):
+    """Colormapped, resized thermal/depth preview — cached by file path so the
+    (now rare) full reruns don't recompute the colormap every time."""
+    return cv2.resize(norm_colormap(np.load(path), cmap), (size, size))
+
 def enhance_low_light(img: Image.Image, boost=1., gamma=1.):
     arr  = np.asarray(img.convert("RGB"))
     should = arr.mean() < 55 or np.percentile(arr, 99) < 150
@@ -333,12 +364,26 @@ def disp_to_depth(roi, Q, cx, cy):
 # Canvas wrapper (uses public st_canvas API)
 # ─────────────────────────────────────────────────────────────────────────────
 
-def stable_canvas(fill, sw, sc, initial, update, h, w, mode, key):
+def stable_canvas(fill, sw, sc, initial, update, h, w, mode, key, bg=None):
+    # bg (a PIL image) goes through the component's background_image path: uploaded
+    # once to Streamlit's media manager, referenced by URL, and — crucially — NOT
+    # serialized back on mouse events. That keeps the per-event payload tiny.
     return st_canvas(fill_color=fill, stroke_width=sw, stroke_color=sc,
-                     background_color="", background_image=None,
+                     background_color="", background_image=bg,
                      update_streamlit=update, height=h, width=w,
                      drawing_mode=mode, initial_drawing=initial,
                      display_toolbar=True, point_display_radius=3, key=key)
+
+# ── Fragment shim ─────────────────────────────────────────────────────────────
+# st.fragment (stable since Streamlit 1.37, experimental since 1.33) scopes a
+# rerun to a single function. Putting the canvas in a fragment means each drawing
+# event re-runs ONLY the canvas — not the sidebar, controls, thermal/depth panels,
+# or image decoding — which is what kills the flicker. On older Streamlit we fall
+# back to a no-op decorator (behaves like before, still correct, just not isolated).
+fragment = getattr(st, "fragment", None) or getattr(st, "experimental_fragment", None)
+if fragment is None:
+    def fragment(func=None, **_kwargs):
+        return func if func is not None else (lambda f: f)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Migrate old annotations to new schema
@@ -525,8 +570,8 @@ t_mean = float(np.nanmean(thermal_raw))
 
 # Fixed 640px for display — st.image + use_column_width will scale to column width
 VIS_SIZE = 640
-thm_vis  = cv2.resize(norm_colormap(thermal_raw, cv2.COLORMAP_INFERNO), (VIS_SIZE, VIS_SIZE))
-dep_vis  = cv2.resize(norm_colormap(depth_raw,   cv2.COLORMAP_VIRIDIS), (VIS_SIZE, VIS_SIZE))
+thm_vis  = _modality_vis(current_scene["thermal"], cv2.COLORMAP_INFERNO, VIS_SIZE)
+dep_vis  = _modality_vis(current_scene["depth"],   cv2.COLORMAP_VIRIDIS, VIS_SIZE)
 
 # ── Depth coverage boundary: find leftmost column with valid disparity ────────
 _depth_w = depth_raw.shape[1]
@@ -551,21 +596,27 @@ else:
     _no_depth_boundary_disp = None
 
 # ── Build canvas ─────────────────────────────────────────────────────────────
-# Cache the base64 encoding of the background image in session_state so polygon
-# vertex clicks (which trigger re-runs) don't re-encode the image every time.
-_img_cache_key = f"bg_url_{selected_ds}_{sel_scene}_{disp_w}_{disp_h}_{show_orig}_{rgb_zoom}_{rgb_boost}_{rgb_gamma}"
-if _img_cache_key not in st.session_state:
-    for k in [k for k in st.session_state if k.startswith("bg_url_")]:
-        del st.session_state[k]
-    st.session_state[_img_cache_key] = pil_to_data_url(disp_img)
-_bg_url = st.session_state[_img_cache_key]
-
-_bg_fabric = {"type":"image","version":"4.4.0","originX":"left","originY":"top",
-              "left":0,"top":0,"width":disp_w,"height":disp_h,"fill":"rgb(0,0,0)",
-              "stroke":None,"strokeWidth":0,"scaleX":1,"scaleY":1,"angle":0,
-              "opacity":1,"selectable":False,"evented":False,"hasControls":False,
-              "hasBorders":False,"src":_bg_url,"crossOrigin":None,"filters":[]}
-canvas_objs = [_bg_fabric]
+# Fast path (_HAS_BG_URL): hand the RGB frame to the canvas via background_image
+# (see stable_canvas) so it uploads once and is never serialized back on mouse
+# events — this is what removes the drawing lag. Only annotation shapes go into
+# initial_drawing. Slow fallback (old Streamlit lacking image_to_url): embed the
+# frame as a base64 object, cached in session_state to avoid re-encoding it.
+if _HAS_BG_URL:
+    canvas_bg   = disp_img.convert("RGB")
+    canvas_objs = []
+else:
+    canvas_bg = None
+    _img_cache_key = f"bg_url_{selected_ds}_{sel_scene}_{disp_w}_{disp_h}_{show_orig}_{rgb_zoom}_{rgb_boost}_{rgb_gamma}"
+    if _img_cache_key not in st.session_state:
+        for k in [k for k in st.session_state if k.startswith("bg_url_")]:
+            del st.session_state[k]
+        st.session_state[_img_cache_key] = pil_to_data_url(disp_img)
+    _bg_url = st.session_state[_img_cache_key]
+    canvas_objs = [{"type":"image","version":"4.4.0","originX":"left","originY":"top",
+                    "left":0,"top":0,"width":disp_w,"height":disp_h,"fill":"rgb(0,0,0)",
+                    "stroke":None,"strokeWidth":0,"scaleX":1,"scaleY":1,"angle":0,
+                    "opacity":1,"selectable":False,"evented":False,"hasControls":False,
+                    "hasBorders":False,"src":_bg_url,"crossOrigin":None,"filters":[]}]
 for idx, ann in enumerate(scene_anns):
     color = BOX_COLORS[idx % len(BOX_COLORS)]
     if ann.get("shape") == "polygon" and ann.get("polygon_original"):
@@ -625,16 +676,26 @@ with rgb_col:
             "Then click 💾 Save."
         )
 
-    # Key includes annotation count so the canvas resets cleanly after each save.
-    canvas_key = f"canvas_{selected_ds}_{sel_scene}_{APP_VERSION}_{draw_mode}_{len(scene_anns)}"
-    # update=True is required for both modes — without it the canvas state is not sent
-    # to Python and Save sees no drawn shapes. The base64 image is cached in session_state
-    # above to keep re-runs fast.
-    canvas_result = stable_canvas(
-        fill="rgba(0,0,0,0)", sw=stroke_width, sc=stroke_color,
-        initial=init_draw, update=True,
-        h=disp_h, w=disp_w, mode=draw_mode, key=canvas_key,
-    )
+    # Key includes annotation count so the canvas resets cleanly after each save,
+    # and canvas size so a zoom change remounts at the right dimensions.
+    canvas_key = f"canvas_{selected_ds}_{sel_scene}_{APP_VERSION}_{draw_mode}_{disp_w}x{disp_h}_{len(scene_anns)}"
+
+    # The canvas lives in a fragment so drawing events rerun ONLY this block, not the
+    # whole page — that removes the flicker. update=True is still required (without it
+    # the drawn shapes never reach Python); but because the rerun is now scoped to the
+    # fragment, it's cheap. We stash the latest canvas JSON in session_state so the Save
+    # button (which lives outside this fragment, in the control column) can read it.
+    @fragment
+    def _draw_canvas():
+        result = stable_canvas(
+            fill="rgba(0,0,0,0)", sw=stroke_width, sc=stroke_color,
+            initial=init_draw, update=True,
+            h=disp_h, w=disp_w, mode=draw_mode, key=canvas_key,
+            bg=canvas_bg,
+        )
+        st.session_state["_canvas_json"] = result.json_data if result is not None else None
+
+    _draw_canvas()
 
     if _no_depth_boundary_orig is not None:
         st.caption(
@@ -649,73 +710,28 @@ with ctrl_col:
 
     # ── Per-object annotation fields ─────────────────────────────────────────
     st.write("**Object Annotation**")
-
-    # ── Dynamic class list with add-new capability ────────────────────────────
     all_classes = get_all_classes()
-    ADD_NEW = "＋ Add new class…"
-    class_options = all_classes + [ADD_NEW]
 
-    selected_option = st.selectbox(
-        "Object Class", class_options,
-        key=f"cls_{selected_ds}_{sel_scene}",
-    )
-
-    if selected_option == ADD_NEW:
+    # Add-new-class lives OUTSIDE the form: a form can't contain st.button, and the
+    # class list must refresh immediately after adding. Rare action → collapsed.
+    with st.expander("➕ Add a new object class", expanded=False):
         new_class_raw = st.text_input(
-            "New class name",
-            placeholder="e.g., toaster, heat_gun, soldering_iron",
-            key=f"new_cls_{selected_ds}_{sel_scene}",
-        )
-        new_class = re.sub(r"[^a-zA-Z0-9]+", "_", new_class_raw.strip()).strip("_").lower()
-
+            "New class name", placeholder="e.g., toaster, heat_gun, soldering_iron",
+            key=f"new_cls_{selected_ds}_{sel_scene}")
         if st.button("✅ Add class", key=f"add_cls_{selected_ds}_{sel_scene}"):
+            new_class = re.sub(r"[^a-zA-Z0-9]+", "_", new_class_raw.strip()).strip("_").lower()
             if not new_class:
                 st.error("Please enter a class name.")
-                st.stop()
-            existing = get_all_classes()
-            if new_class in existing:
-                st.warning(f"'{new_class}' already exists — select it from the list.")
+            elif new_class in get_all_classes():
+                st.warning(f"'{new_class}' already exists — select it below.")
             else:
-                custom = load_custom_classes()
-                custom.append(new_class)
+                custom = load_custom_classes(); custom.append(new_class)
                 save_custom_classes(custom)
-                st.success(f"'{new_class}' added. Select it from the dropdown.")
+                st.success(f"'{new_class}' added — select it below.")
                 st.rerun()
-        obj_class = new_class or ADD_NEW   # will be caught as invalid on Save
-    else:
-        obj_class = selected_option
-    obj_state = st.selectbox("Object State", OBJECT_STATES,
-                               key=f"state_{selected_ds}_{sel_scene}")
-    is_ctx    = st.checkbox("Contextual hazard (state-dependent)",
-                             value=False, key=f"ctx_{selected_ds}_{sel_scene}",
-                             help="Check if this object is only dangerous above a certain temperature (e.g. a mug, laptop).")
 
-    # ── New per-object fields ────────────────────────────────────────────────
-    instance_id = st.text_input(
-        "Instance ID", placeholder="e.g. stove_007_burner_frontleft",
-        help="Human-readable stable id for THIS physical object. Keep it consistent "
-             "across the left/right views. Define front/back/left/right RELATIVE TO "
-             "THE STOVE, not the camera. Used by Tasks B and C.",
-        key=f"iid_{selected_ds}_{sel_scene}")
-
-    oh_a, oh_b = st.columns(2)
-    obj_haz_label = oh_a.selectbox(
-        "Object hazard (Task D)", HAZARD_LABELS,
-        help="Per-object ground truth for segmentation. A lit burner = HAZARD; the "
-             "cold burner beside it = SAFE. Judge by sight, not temperature.",
-        key=f"ohl_{selected_ds}_{sel_scene}")
-    obj_haz_tier = oh_b.selectbox(
-        "Object tier", HAZARD_TIERS,
-        help="Optional graded per-object hazard.",
-        key=f"oht_{selected_ds}_{sel_scene}")
-
-    region_caption = st.text_area(
-        "Region caption (Task C)", placeholder="A lit gas burner glowing at ~115°C "
-        "at the front-left of the stovetop with a pot on it.",
-        height=70, key=f"rcap_{selected_ds}_{sel_scene}",
-        help="A factual sentence describing THIS object/region for dense captioning.")
-
-    # Spatial relations editor (Tasks B & C). Targets are other objects' instance ids.
+    # Spatial relations editor (Tasks B & C) — also OUTSIDE the form (uses buttons).
+    # Staged relations are stored in session_state and read when the annotation saves.
     with st.expander("🔗 Spatial relations", expanded=False):
         st.caption("Relations FROM this object to others (e.g. heat source → nearby cloth). "
                    "Only annotate relations that matter.")
@@ -762,13 +778,49 @@ with ctrl_col:
                     st.session_state.pending_relations[pr_key].pop(ri)
                     st.rerun()
 
-    if st.button("💾 Save Annotation", type="primary", width="stretch"):
-        raw_objs = (canvas_result.json_data or {}).get("objects", [])
+    # ── Save form ─────────────────────────────────────────────────────────────
+    # Filling these fields causes NO rerun and NO canvas redraw — the page only
+    # reruns when you press Save. This removes the per-widget flicker you saw while
+    # choosing class / state / hazard on every keystroke or selection.
+    with st.form(key=f"ann_form_{selected_ds}_{sel_scene}", clear_on_submit=False):
+        obj_class = st.selectbox("Object Class", all_classes,
+                                 key=f"cls_{selected_ds}_{sel_scene}")
+        obj_state = st.selectbox("Object State", OBJECT_STATES,
+                                 key=f"state_{selected_ds}_{sel_scene}")
+        is_ctx    = st.checkbox("Contextual hazard (state-dependent)", value=False,
+                                key=f"ctx_{selected_ds}_{sel_scene}",
+                                help="Check if this object is only dangerous above a certain temperature (e.g. a mug, laptop).")
+        instance_id = st.text_input(
+            "Instance ID", placeholder="e.g. stove_007_burner_frontleft",
+            help="Human-readable stable id for THIS physical object. Keep it consistent "
+                 "across the left/right views. Define front/back/left/right RELATIVE TO "
+                 "THE STOVE, not the camera. Used by Tasks B and C.",
+            key=f"iid_{selected_ds}_{sel_scene}")
+        oh_a, oh_b = st.columns(2)
+        obj_haz_label = oh_a.selectbox(
+            "Object hazard (Task D)", HAZARD_LABELS,
+            help="Per-object ground truth for segmentation. A lit burner = HAZARD; the "
+                 "cold burner beside it = SAFE. Judge by sight, not temperature.",
+            key=f"ohl_{selected_ds}_{sel_scene}")
+        obj_haz_tier = oh_b.selectbox(
+            "Object tier", HAZARD_TIERS,
+            help="Optional graded per-object hazard.",
+            key=f"oht_{selected_ds}_{sel_scene}")
+        region_caption = st.text_area(
+            "Region caption (Task C)", placeholder="A lit gas burner glowing at ~115°C "
+            "at the front-left of the stovetop with a pot on it.",
+            height=70, key=f"rcap_{selected_ds}_{sel_scene}",
+            help="A factual sentence describing THIS object/region for dense captioning.")
+        submitted = st.form_submit_button("💾 Save Annotation", type="primary",
+                                          width="stretch")
+
+    if submitted:
+        raw_objs = (st.session_state.get("_canvas_json") or {}).get("objects", [])
         # Collect staged spatial relations for this scene, then clear them.
         _pr_key = f"{selected_ds}_{sel_scene}"
         staged_relations = st.session_state.get("pending_relations", {}).get(_pr_key, [])
 
-        if obj_class == ADD_NEW or not obj_class:
+        if not obj_class:
             st.error("Select or add a valid Object Class before saving.")
             st.stop()
 
@@ -1085,10 +1137,12 @@ with ctrl_col:
     with nx_col:
         st.button("→ Next", width="stretch", on_click=go_next)
 
-    # Progress bar
+    # Progress bar. Count only completed scenes that exist in THIS dataset, otherwise a
+    # progress file carried over from a larger dataset makes done/total exceed 1.0 and
+    # st.progress raises (it requires a value in [0.0, 1.0]).
     total = len(dataset_files)
-    done  = len(completed_scenes)
-    st.progress(done/total if total else 0, text=f"{done}/{total} scenes completed")
+    done  = sum(1 for s in completed_scenes if s in scene_names)
+    st.progress(min(1.0, done/total) if total else 0, text=f"{done}/{total} scenes completed")
 
 # ── Modality views ───────────────────────────────────────────────────────────
 st.markdown("---")
