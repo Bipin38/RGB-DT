@@ -1,8 +1,14 @@
 # RGB-D-T annotation tool — Python deps (tested on Python 3.13)
-# streamlit>=1.37 is required for st.fragment, which scopes canvas reruns and
-# removes the drawing flicker. Tested versions are noted after each pin.
-streamlit>=1.37            # tested 1.58.0
-streamlit-drawable-canvas==0.9.3
+#
+# Fast web annotator (server.py + static/). Drawing is client-side, so there is
+# no streamlit-drawable-canvas lag. FastAPI serves the API + static frontend.
+fastapi>=0.110            # tested 0.115
+uvicorn[standard]>=0.27   # ASGI server: `uvicorn app.server:app --port 8000`
 opencv-python-headless>=4.8 # tested 4.13.0 (headless: no GUI libs needed on a server)
 pillow>=10                 # tested 12.2.0
 numpy>=1.24                # tested 2.5.0
+
+# Legacy Streamlit tool (annotator_v3.py) — optional fallback only. Uncomment to
+# keep it runnable alongside the new web app:
+# streamlit>=1.37
+# streamlit-drawable-canvas==0.9.3

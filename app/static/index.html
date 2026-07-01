@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RGB-D-T Annotator</title>
+<link rel="stylesheet" href="/style.css" />
+<script>
+  // Apply the saved theme before first paint to avoid a flash of the wrong theme.
+  (function () {
+    var t = localStorage.getItem("rgbdt_theme") || "dark";
+    document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+</head>
+<body>
+<header>
+  <div class="brand">🌡 RGB-D-T Annotator <span id="dataset" class="muted"></span></div>
+  <div class="thermal-banner" id="thermalBanner"></div>
+  <button id="themeToggle" class="theme-toggle" title="Toggle light/dark (T)">🌙</button>
+  <div class="save-state" id="saveState">saved</div>
+</header>
+
+<main>
+  <!-- LEFT: scene list -->
+  <aside id="sceneList">
+    <div class="panel-title">Scenes <span id="progress" class="muted"></span></div>
+    <input id="sceneFilter" placeholder="filter…" />
+    <ul id="scenes"></ul>
+  </aside>
+
+  <!-- CENTER: canvas -->
+  <section id="canvasWrap">
+    <div class="toolbar">
+      <div class="seg">
+        <button data-mode="rect" class="mode active">▭ Rectangle</button>
+        <button data-mode="polygon" class="mode">⬡ Polygon</button>
+      </div>
+      <label class="chk"><input type="checkbox" id="enhance" /> Brighten (low-light)</label>
+      <button id="undoPoint" class="ghost" hidden>⤺ Undo point (⌫)</button>
+      <button id="finishPoly" class="ghost" hidden>Finish polygon (Enter)</button>
+      <button id="cancelShape" class="ghost" hidden>Cancel (Esc)</button>
+      <span id="hint" class="muted"></span>
+    </div>
+    <div class="stage">
+      <canvas id="canvas"></canvas>
+    </div>
+    <div id="boundaryNote" class="muted"></div>
+
+    <div class="modalities">
+      <figure><figcaption>🌡 Thermal (Inferno)</figcaption><img id="thermalImg" /></figure>
+      <figure><figcaption>📏 Depth (Viridis)</figcaption><img id="depthImg" /></figure>
+    </div>
+  </section>
+
+  <!-- RIGHT: controls -->
+  <aside id="controls">
+    <div class="panel-title">Object</div>
+    <div id="pendingStats" class="stats muted">Draw a shape to compute temp/depth…</div>
+
+    <label>Class
+      <select id="objClass"></select>
+    </label>
+    <div class="row">
+      <button id="addClassBtn" class="ghost small">➕ new class</button>
+    </div>
+    <label>State <select id="objState"></select></label>
+    <div class="grid2">
+      <label>Hazard <select id="objHazLabel"></select></label>
+      <label>Tier <select id="objHazTier"></select></label>
+    </div>
+    <label class="chk"><input type="checkbox" id="isCtx" /> Contextual (state-dependent)</label>
+    <label>Region caption <textarea id="regionCaption" rows="2"></textarea></label>
+
+    <details>
+      <summary>🔗 Spatial relations <span id="relCount" class="muted"></span></summary>
+      <div class="grid2">
+        <label>Relation <select id="relType"></select></label>
+        <label>Distance (m) <input id="relDist" type="number" step="0.05" value="0" /></label>
+      </div>
+      <label>Target instance id <input id="relTarget" placeholder="other object's instance_id" /></label>
+      <button id="stageRel" class="ghost small">➕ stage relation</button>
+      <ul id="stagedRels" class="mini"></ul>
+    </details>
+
+    <button id="addObject" class="primary">➕ Add object</button>
+    <button id="cancelEdit" class="ghost" hidden style="width:100%">✕ Cancel edit</button>
+
+    <div class="panel-title">Saved objects <span id="objCount" class="muted"></span></div>
+    <div class="muted" style="margin-bottom:6px">Click a saved object to edit its fields.</div>
+    <ul id="savedObjects" class="objects"></ul>
+
+    <details open>
+      <summary>📋 Scene metadata</summary>
+      <label>Description <textarea id="mDescription" rows="2"></textarea></label>
+      <label>Kitchen ID ⚠️ <select id="mKitchen"></select></label>
+      <div class="grid2">
+        <label>Scene hazard <select id="mHazLabel"></select></label>
+        <label>Scene tier <select id="mHazTier"></select></label>
+      </div>
+      <div class="grid2">
+        <label>Lighting <select id="mLighting"></select></label>
+        <label>Scene type <select id="mSceneType"></select></label>
+      </div>
+      <label>Scene caption <textarea id="mCaption" rows="2"></textarea></label>
+      <button id="saveMeta" class="primary">💾 Save scene metadata</button>
+      <div id="metaStatus" class="meta-status"></div>
+    </details>
+
+    <details>
+      <summary>❓ VQA pairs <span id="qaCount" class="muted"></span></summary>
+      <ul id="qaList" class="mini"></ul>
+      <label>Question <input id="qaQ" /></label>
+      <div class="grid2">
+        <label>Answer <input id="qaA" /></label>
+        <label>Type <select id="qaType"></select></label>
+      </div>
+      <div class="chks">
+        <label class="chk"><input type="checkbox" class="qamod" value="rgb" /> rgb</label>
+        <label class="chk"><input type="checkbox" class="qamod" value="thermal" /> thermal</label>
+        <label class="chk"><input type="checkbox" class="qamod" value="depth" /> depth</label>
+      </div>
+      <button id="addQa" class="ghost small">➕ add QA pair</button>
+    </details>
+
+    <div class="nav">
+      <button id="prevScene" class="ghost">◀ Prev (P)</button>
+      <button id="completeScene" class="primary">✅ Complete & next</button>
+      <button id="nextScene" class="ghost">Next (N) ▶</button>
+    </div>
+  </aside>
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>

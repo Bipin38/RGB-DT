@@ -1,0 +1,118 @@
+:root {
+  /* dark theme (default) */
+  --bg: #0f1115; --panel: #171a21; --panel2: #1e222b; --line: #2a2f3a;
+  --fg: #e6e9ef; --muted: #8b93a3; --accent: #4a9eff; --accent2: #2b6fd6;
+  --ok: #3ecf6b; --warn: #ffb020; --err: #ff5a5a;
+  --stage: #000;
+}
+:root[data-theme="light"] {
+  --bg: #f4f6f9; --panel: #ffffff; --panel2: #eceff4; --line: #d3d8e0;
+  --fg: #1b2029; --muted: #616b7a; --accent: #2b6fd6; --accent2: #2b6fd6;
+  --ok: #1f9d51; --warn: #b8730a; --err: #d33;
+  --stage: #dfe3ea;   /* light backing so a dark low-light image stays distinguishable */
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  display: flex; flex-direction: column;
+}
+header {
+  display: flex; align-items: center; gap: 16px; padding: 8px 14px;
+  background: var(--panel); border-bottom: 1px solid var(--line); flex: 0 0 auto;
+}
+.brand { font-weight: 600; font-size: 14px; }
+.thermal-banner { flex: 1; color: var(--muted); font-size: 12px; }
+.thermal-banner b { color: var(--fg); }
+.theme-toggle { background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 4px 9px; font-size: 15px; line-height: 1; cursor: pointer; }
+.theme-toggle:hover { border-color: var(--accent); }
+.save-state { font-size: 12px; color: var(--muted); }
+.save-state.dirty { color: var(--warn); }
+.save-state.saving { color: var(--accent); }
+.save-state.error { color: var(--err); }
+
+main { flex: 1; display: grid; grid-template-columns: 200px 1fr 340px; min-height: 0; }
+aside, section { overflow-y: auto; padding: 10px; }
+#sceneList { background: var(--panel); border-right: 1px solid var(--line); }
+#controls { background: var(--panel); border-left: 1px solid var(--line); }
+#canvasWrap { display: flex; flex-direction: column; gap: 10px; }
+
+.panel-title { font-weight: 600; margin: 14px 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.panel-title:first-child { margin-top: 0; }
+.muted { color: var(--muted); font-weight: 400; font-size: 11px; }
+
+/* scene list */
+#sceneFilter { width: 100%; margin-bottom: 8px; }
+#scenes { list-style: none; margin: 0; padding: 0; }
+#scenes li { padding: 5px 8px; border-radius: 5px; cursor: pointer; display: flex; justify-content: space-between; gap: 6px; }
+#scenes li:hover { background: var(--panel2); }
+#scenes li.active { background: var(--accent2); color: #fff; }
+#scenes li .badge { font-size: 10px; color: var(--muted); }
+#scenes li.active .badge { color: #dbe7ff; }
+#scenes li.done::before { content: "✅ "; }
+
+/* toolbar */
+.toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg .mode { background: var(--panel2); border: 0; color: var(--fg); padding: 6px 12px; cursor: pointer; }
+.seg .mode.active { background: var(--accent2); color: #fff; }
+
+/* stage / canvas */
+.stage { background: var(--stage); border: 1px solid var(--line); border-radius: 8px; display: flex; justify-content: center; align-items: center; padding: 6px; }
+/* Thin frame around the actual image so its bounds are always visible, even when
+   a dark low-light scene matches the stage backing. */
+#canvas { max-width: 100%; max-height: 70vh; cursor: crosshair; image-rendering: auto; border: 1px solid var(--muted); }
+.modalities { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.modalities figure { margin: 0; }
+.modalities figcaption { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.modalities img { width: 100%; border-radius: 6px; border: 1px solid var(--line); display: block; }
+
+/* controls */
+label { display: block; margin: 8px 0; font-size: 12px; color: var(--muted); }
+label input, label select, label textarea { display: block; width: 100%; margin-top: 3px; }
+input, select, textarea, button { font: inherit; }
+input, select, textarea {
+  background: var(--panel2); border: 1px solid var(--line); color: var(--fg);
+  border-radius: 5px; padding: 5px 7px;
+}
+textarea { resize: vertical; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.row { display: flex; gap: 8px; }
+.chk { display: flex; align-items: center; gap: 6px; }
+.chk input { width: auto; margin: 0; }
+.chks { display: flex; gap: 12px; margin: 6px 0; }
+
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--panel2); color: var(--fg); padding: 7px 10px; }
+button:hover { border-color: var(--accent); }
+button.primary { background: var(--accent2); border-color: var(--accent2); color: #fff; width: 100%; margin: 8px 0; font-weight: 600; }
+button.primary:hover { background: var(--accent); }
+button.ghost { background: transparent; }
+button.small { padding: 4px 8px; font-size: 12px; }
+
+.stats { background: var(--panel2); border-radius: 6px; padding: 8px; font-size: 12px; margin-bottom: 8px; }
+.stats.hot { border-left: 3px solid var(--err); }
+.stats b { color: var(--fg); }
+
+.objects { list-style: none; margin: 0; padding: 0; }
+.objects li { padding: 6px 8px; border-radius: 6px; background: var(--panel2); margin-bottom: 5px; display: flex; justify-content: space-between; gap: 8px; cursor: pointer; border-left: 3px solid transparent; }
+.objects li.sel { outline: 1px solid var(--accent); }
+.objects li.editing { outline: 2px solid var(--warn); background: color-mix(in srgb, var(--warn) 12%, var(--panel2)); }
+.objects li .meta { font-size: 11px; color: var(--muted); }
+.objects li .del { color: var(--err); background: none; border: none; padding: 0 4px; }
+
+.mini { list-style: none; margin: 6px 0; padding: 0; font-size: 12px; }
+.mini li { padding: 4px 6px; background: var(--panel2); border-radius: 5px; margin-bottom: 4px; display: flex; justify-content: space-between; gap: 6px; }
+.mini .del { color: var(--err); background: none; border: none; }
+
+details { border-top: 1px solid var(--line); padding-top: 6px; margin-top: 10px; }
+summary { cursor: pointer; font-weight: 600; font-size: 12px; }
+.nav { display: flex; gap: 8px; margin: 16px 0; }
+.nav button { flex: 1; }
+.nav button.blocked { opacity: .5; }
+
+.meta-status { font-size: 11px; margin-top: 6px; min-height: 14px; padding: 2px 4px; border-radius: 4px; }
+.meta-status.ok { color: var(--ok); }
+.meta-status.warn { color: var(--warn); }
+.meta-status.flash { animation: metaflash .5s ease 3; }
+@keyframes metaflash { 50% { background: color-mix(in srgb, var(--warn) 35%, transparent); } }

@@ -1,3 +1,17 @@
-Dataset/
-Test Dataset/
+# Raw dataset — synced separately, NOT committed.
+# Anchored with a leading slash so it ONLY matches the top-level Dataset/ and does
+# NOT (via macOS case-insensitivity) also swallow annotations/dataset/, which holds
+# the per-scene annotation files teammates share through git.
+/Dataset/
+/Test Dataset/
+
+# Annotation outputs ARE committed and shared through git — do not ignore them:
+#   annotations/<slug>/<scene>.json, annotations_*.json, progress_*.json
+
 __pycache__/
+.venv/
+*.tmp
+.DS_Store
+
+.claude/
+

@@ -1,0 +1,185 @@
+{
+  "ambient_temp_c": 22.0,
+  "lighting": "dim",
+  "scene_type": "kitchen",
+  "thermal_scene_min_c": 11.375946044921875,
+  "thermal_scene_max_c": 25.774871826171875,
+  "thermal_scene_mean_c": 23.21977424621582,
+  "kitchen_id": "kitchen_001",
+  "capture_id": "",
+  "scene_hazard_label": "SAFE",
+  "scene_hazard_tier": "SAFE",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "annotation_id": "f601f436-08a6-48fc-8e8a-efaddc7af6a7",
+      "class": "utensils",
+      "object_class": "utensils",
+      "instance_id": "",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": true,
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 93,
+        "y_min": 295,
+        "x_max": 356,
+        "y_max": 412
+      },
+      "polygon_original": [
+        {
+          "x": 93,
+          "y": 378
+        },
+        {
+          "x": 102,
+          "y": 342
+        },
+        {
+          "x": 135,
+          "y": 320
+        },
+        {
+          "x": 179,
+          "y": 304
+        },
+        {
+          "x": 237,
+          "y": 295
+        },
+        {
+          "x": 290,
+          "y": 295
+        },
+        {
+          "x": 333,
+          "y": 306
+        },
+        {
+          "x": 356,
+          "y": 325
+        },
+        {
+          "x": 353,
+          "y": 359
+        },
+        {
+          "x": 339,
+          "y": 382
+        },
+        {
+          "x": 306,
+          "y": 401
+        },
+        {
+          "x": 248,
+          "y": 408
+        },
+        {
+          "x": 185,
+          "y": 412
+        },
+        {
+          "x": 144,
+          "y": 410
+        },
+        {
+          "x": 110,
+          "y": 401
+        }
+      ],
+      "temp_min_c": 21.4521484375,
+      "temp_mean_c": 22.095306396484375,
+      "temp_max_c": 23.5511474609375,
+      "temp_delta_c": 12.175201416015625,
+      "max_temp": 23.5511474609375,
+      "median_depth_meters": 1.0054900687109165,
+      "region_caption": "",
+      "spatial_relations": [],
+      "hazard_tier": "UNKNOWN"
+    },
+    {
+      "annotation_id": "05e4f709-e786-4e09-a935-56f34c789918",
+      "class": "utensils",
+      "object_class": "utensils",
+      "instance_id": "",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": true,
+      "shape": "rectangle",
+      "bbox_original": {
+        "x_min": 147,
+        "y_min": 439,
+        "x_max": 395,
+        "y_max": 577
+      },
+      "temp_min_c": 20.973663330078125,
+      "temp_mean_c": 22.077449798583984,
+      "temp_max_c": 23.961578369140625,
+      "temp_delta_c": 12.58563232421875,
+      "max_temp": 23.961578369140625,
+      "median_depth_meters": 0.8498903303171553,
+      "region_caption": "",
+      "spatial_relations": [],
+      "hazard_tier": "UNKNOWN"
+    },
+    {
+      "annotation_id": "4187e554-b520-4a91-a9fd-694011bc00e2",
+      "class": "utensils",
+      "object_class": "utensils",
+      "instance_id": "",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": true,
+      "shape": "rectangle",
+      "bbox_original": {
+        "x_min": 541,
+        "y_min": 350,
+        "x_max": 784,
+        "y_max": 516
+      },
+      "temp_min_c": 21.41448974609375,
+      "temp_mean_c": 22.208730697631836,
+      "temp_max_c": 23.454254150390625,
+      "temp_delta_c": 12.07830810546875,
+      "max_temp": 23.454254150390625,
+      "median_depth_meters": 0.893252720618279,
+      "region_caption": "",
+      "spatial_relations": [],
+      "hazard_tier": "UNKNOWN"
+    },
+    {
+      "annotation_id": "6dc48225-70e0-4e2c-8e23-5ab8885884d3",
+      "class": "utensils",
+      "object_class": "utensils",
+      "instance_id": "",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": true,
+      "shape": "rectangle",
+      "bbox_original": {
+        "x_min": 469,
+        "y_min": 241,
+        "x_max": 638,
+        "y_max": 345
+      },
+      "temp_min_c": 11.91058349609375,
+      "temp_mean_c": 19.190044403076172,
+      "temp_max_c": 23.333770751953125,
+      "temp_delta_c": 11.95782470703125,
+      "max_temp": 23.333770751953125,
+      "median_depth_meters": 1.0661155310477586,
+      "region_caption": "",
+      "spatial_relations": [],
+      "hazard_tier": "UNKNOWN"
+    }
+  ],
+  "description": "",
+  "completed": true
+}
