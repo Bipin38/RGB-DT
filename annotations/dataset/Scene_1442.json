@@ -1,0 +1,105 @@
+{
+  "description": "",
+  "ambient_temp_c": null,
+  "lighting": "dark",
+  "scene_type": "kitchen",
+  "thermal_scene_min_c": 20.30511474609375,
+  "thermal_scene_max_c": 73.144775390625,
+  "thermal_scene_mean_c": 22.59099006652832,
+  "kitchen_id": "kitchen_003",
+  "capture_id": "",
+  "scene_hazard_label": "HAZARD",
+  "scene_hazard_tier": "CRITICAL",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "class": "radiator",
+      "object_class": "radiator",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "rectangle",
+      "bbox_original": {
+        "x_min": 417,
+        "y_min": 23,
+        "x_max": 523,
+        "y_max": 120
+      },
+      "temp_min_c": 23.38665771484375,
+      "temp_mean_c": 24.41668128967285,
+      "temp_max_c": 27.114501953125,
+      "temp_delta_c": 6.80938720703125,
+      "max_temp": 27.114501953125,
+      "median_depth_meters": 2.0430837020966557,
+      "annotation_id": "1dd1eee1-a08a-4b42-aac0-060c5b3feb4b",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "stove_burner",
+      "object_class": "stove_burner",
+      "object_state": "OFF",
+      "object_hazard_label": "HAZARD",
+      "object_hazard_tier": "MEDIUM",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 344,
+        "y_min": 142,
+        "x_max": 404,
+        "y_max": 165
+      },
+      "temp_min_c": 30.397705078125,
+      "temp_mean_c": 35.2412223815918,
+      "temp_max_c": 43.66168212890625,
+      "temp_delta_c": 23.3565673828125,
+      "max_temp": 43.66168212890625,
+      "median_depth_meters": 1.872730606128834,
+      "polygon_original": [
+        {
+          "x": 344,
+          "y": 150
+        },
+        {
+          "x": 355,
+          "y": 142
+        },
+        {
+          "x": 374,
+          "y": 142
+        },
+        {
+          "x": 392,
+          "y": 149
+        },
+        {
+          "x": 404,
+          "y": 159
+        },
+        {
+          "x": 391,
+          "y": 160
+        },
+        {
+          "x": 382,
+          "y": 165
+        },
+        {
+          "x": 366,
+          "y": 164
+        }
+      ],
+      "annotation_id": "93fe5761-8fd9-48b6-ab3e-2e5e509437ed",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    }
+  ],
+  "completed": true
+}
