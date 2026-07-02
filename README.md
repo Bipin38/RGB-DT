@@ -9,16 +9,27 @@ Drawing runs **100% in the browser**, so there is no lag — the server is only
 contacted to load a scene, compute a box's temp/depth, and save.
 
 ## Quick start
+
+**macOS / Linux (and Windows via Git Bash / WSL):**
 ```bash
 git clone <repo> && cd RGB-DT
 ./scripts/setup.sh        # create the virtualenv + install dependencies (once)
 ./scripts/run.sh          # start the app → http://localhost:8000
+# ./scripts/run.sh 8080   # custom port
 ```
-Copy the shared **`Dataset/`** folder to the project root first (it is not in
-git). `run.sh` warns if no scenes are found.
 
-- `./scripts/run.sh 8080` — use a different port.
-- Stop the server with `Ctrl-C`.
+**Windows (native PowerShell):**
+```powershell
+git clone <repo>; cd RGB-DT
+powershell -ExecutionPolicy Bypass -File .\scripts\setup.ps1   # once
+powershell -ExecutionPolicy Bypass -File .\scripts\run.ps1     # start → http://localhost:8000
+# ...run.ps1 -Port 8080   # custom port
+```
+(The `-ExecutionPolicy Bypass` avoids Windows' default script-blocking. Requires
+[Python 3.10+](https://python.org) with "Add to PATH" checked at install.)
+
+Copy the shared **`Dataset/`** folder to the project root first (it is not in
+git). The run script warns if no scenes are found. Stop the server with `Ctrl-C`.
 
 ## Project layout
 ```

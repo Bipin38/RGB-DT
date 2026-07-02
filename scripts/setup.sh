@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ============================================================================
 # setup.sh — create the virtualenv and install dependencies (run once).
+# Works on macOS / Linux, and on Windows under Git Bash or WSL.
 #
 #   git clone <repo> && cd RGB-DT
 #   ./scripts/setup.sh
@@ -23,8 +24,11 @@ if [ ! -d .venv ]; then
   "$PY" -m venv .venv
 fi
 
+# venv layout differs by OS: .venv/bin (macOS/Linux) vs .venv/Scripts (Windows).
+VPY=".venv/bin/python"; [ -x "$VPY" ] || VPY=".venv/Scripts/python.exe"
+
 echo "▶ Installing dependencies …"
-.venv/bin/python -m pip install --quiet --upgrade pip
-.venv/bin/python -m pip install --quiet -r requirements.txt
+"$VPY" -m pip install --quiet --upgrade pip
+"$VPY" -m pip install --quiet -r requirements.txt
 
 echo "✅ Setup complete. Start the app with:  ./scripts/run.sh"
