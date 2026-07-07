@@ -11,5 +11,8 @@
   "fire_extinguisher",
   "rice_cooker",
   "dustbin",
-  "pan"
+  "pan",
+  "room_door",
+  "refrigerator",
+  "pressure_cooker"
 ]

@@ -1,10 +1,10 @@
 {
-  "ambient_temp_c": 22.0,
+  "ambient_temp_c": null,
   "lighting": "well_lit",
   "scene_type": "kitchen",
   "thermal_scene_min_c": 18.657501220703125,
   "thermal_scene_max_c": 100.19699096679688,
-  "thermal_scene_mean_c": 21.41202163696289,
+  "thermal_scene_mean_c": 21.382173538208008,
   "kitchen_id": "kitchen_002",
   "capture_id": "",
   "scene_hazard_label": "HAZARD",
@@ -99,11 +99,11 @@
           "y": 219
         }
       ],
-      "temp_min_c": 21.553497314453125,
-      "temp_mean_c": 21.932584762573242,
-      "temp_max_c": 23.326324462890625,
-      "temp_delta_c": 4.6688232421875,
-      "max_temp": 23.326324462890625,
+      "temp_min_c": 21.4881591796875,
+      "temp_mean_c": 22.152788162231445,
+      "temp_max_c": 27.14404296875,
+      "temp_delta_c": 8.486541748046875,
+      "max_temp": 27.14404296875,
       "median_depth_meters": 1.1770301112883266,
       "region_caption": "",
       "spatial_relations": [],
@@ -191,8 +191,8 @@
           "y": 245
         }
       ],
-      "temp_min_c": 30.597869873046875,
-      "temp_mean_c": 79.68724060058594,
+      "temp_min_c": 25.382080078125,
+      "temp_mean_c": 67.65265655517578,
       "temp_max_c": 100.19699096679688,
       "temp_delta_c": 81.53948974609375,
       "max_temp": 100.19699096679688,
@@ -303,11 +303,11 @@
           "y": 142
         }
       ],
-      "temp_min_c": 20.97900390625,
-      "temp_mean_c": 21.468725204467773,
-      "temp_max_c": 22.04351806640625,
-      "temp_delta_c": 3.386016845703125,
-      "max_temp": 22.04351806640625,
+      "temp_min_c": 20.774932861328125,
+      "temp_mean_c": 21.403894424438477,
+      "temp_max_c": 22.201263427734375,
+      "temp_delta_c": 3.54376220703125,
+      "max_temp": 22.201263427734375,
       "median_depth_meters": 1.3451129664368098,
       "region_caption": "",
       "spatial_relations": [],
@@ -391,8 +391,8 @@
           "y": 127
         }
       ],
-      "temp_min_c": 21.995147705078125,
-      "temp_mean_c": 22.793498992919922,
+      "temp_min_c": 21.9195556640625,
+      "temp_mean_c": 22.379426956176758,
       "temp_max_c": 23.35504150390625,
       "temp_delta_c": 4.697540283203125,
       "max_temp": 23.35504150390625,

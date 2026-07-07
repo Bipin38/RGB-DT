@@ -1,0 +1,45 @@
+{
+  "description": "It's not a kitchen scene.",
+  "ambient_temp_c": null,
+  "lighting": "well_lit",
+  "scene_type": "living_room",
+  "thermal_scene_min_c": 17.4117431640625,
+  "thermal_scene_max_c": 19.330169677734375,
+  "thermal_scene_mean_c": 18.163829803466797,
+  "kitchen_id": "kitchen_001",
+  "capture_id": "",
+  "scene_hazard_label": "SAFE",
+  "scene_hazard_tier": "SAFE",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "class": "room_door",
+      "object_class": "room_door",
+      "object_state": "UNKNOWN",
+      "object_hazard_label": "UNKNOWN",
+      "object_hazard_tier": "UNKNOWN",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "rectangle",
+      "bbox_original": {
+        "x_min": 283,
+        "y_min": 512,
+        "x_max": 542,
+        "y_max": 796
+      },
+      "temp_min_c": 17.473876953125,
+      "temp_mean_c": 17.8670711517334,
+      "temp_max_c": 18.21746826171875,
+      "temp_delta_c": 0.80572509765625,
+      "max_temp": 18.21746826171875,
+      "median_depth_meters": 2.627739707926699,
+      "annotation_id": "4ad2ec1b-56a2-415b-bc6e-5ff22416875a",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    }
+  ],
+  "completed": true
+}
