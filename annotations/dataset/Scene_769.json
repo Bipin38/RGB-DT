@@ -350,5 +350,6 @@
       "hazard_tier": "UNKNOWN",
       "instance_id": ""
     }
-  ]
+  ],
+  "completed": true
 }
