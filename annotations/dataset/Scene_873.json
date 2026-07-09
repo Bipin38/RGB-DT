@@ -1,0 +1,79 @@
+{
+  "description": "",
+  "ambient_temp_c": null,
+  "lighting": "well_lit",
+  "scene_type": "kitchen",
+  "thermal_scene_min_c": 20.529022216796875,
+  "thermal_scene_max_c": 154.73504638671875,
+  "thermal_scene_mean_c": 26.405441284179688,
+  "kitchen_id": "kitchen_003",
+  "capture_id": "",
+  "scene_hazard_label": "HAZARD",
+  "scene_hazard_tier": "CRITICAL",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "class": "oven",
+      "object_class": "oven_door",
+      "object_state": "ON",
+      "object_hazard_label": "HAZARD",
+      "object_hazard_tier": "CRITICAL",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 95,
+        "y_min": 0,
+        "x_max": 532,
+        "y_max": 478
+      },
+      "temp_min_c": 21.38006591796875,
+      "temp_mean_c": 40.37998962402344,
+      "temp_max_c": 154.73504638671875,
+      "temp_delta_c": 134.20602416992188,
+      "max_temp": 154.73504638671875,
+      "median_depth_meters": 1.4922751135217809,
+      "polygon_original": [
+        {
+          "x": 513,
+          "y": 354
+        },
+        {
+          "x": 241,
+          "y": 478
+        },
+        {
+          "x": 100,
+          "y": 327
+        },
+        {
+          "x": 95,
+          "y": 221
+        },
+        {
+          "x": 285,
+          "y": 179
+        },
+        {
+          "x": 261,
+          "y": 2
+        },
+        {
+          "x": 466,
+          "y": 0
+        },
+        {
+          "x": 532,
+          "y": 25
+        }
+      ],
+      "annotation_id": "a4f275b9-0f84-45d9-8d62-5d588b6fa432",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    }
+  ],
+  "completed": true
+}
