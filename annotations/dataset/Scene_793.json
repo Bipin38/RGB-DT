@@ -1,0 +1,67 @@
+{
+  "description": "",
+  "ambient_temp_c": null,
+  "lighting": "well_lit",
+  "scene_type": "kitchen",
+  "thermal_scene_min_c": 4.7454833984375,
+  "thermal_scene_max_c": 28.363616943359375,
+  "thermal_scene_mean_c": 17.03946876525879,
+  "kitchen_id": "kitchen_003",
+  "capture_id": "",
+  "scene_hazard_label": "SAFE",
+  "scene_hazard_tier": "SAFE",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "class": "refrigerator",
+      "object_class": "refrigerator",
+      "object_state": "ON",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 237,
+        "y_min": 6,
+        "x_max": 755,
+        "y_max": 685
+      },
+      "temp_min_c": 4.7454833984375,
+      "temp_mean_c": 10.678984642028809,
+      "temp_max_c": 23.286895751953125,
+      "temp_delta_c": 18.541412353515625,
+      "max_temp": 23.286895751953125,
+      "median_depth_meters": 1.5559186777926375,
+      "polygon_original": [
+        {
+          "x": 237,
+          "y": 6
+        },
+        {
+          "x": 298,
+          "y": 468
+        },
+        {
+          "x": 513,
+          "y": 455
+        },
+        {
+          "x": 594,
+          "y": 685
+        },
+        {
+          "x": 755,
+          "y": 8
+        }
+      ],
+      "annotation_id": "7eca53fd-7edb-4ec3-a814-2bc771cdd094",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    }
+  ],
+  "completed": true
+}
