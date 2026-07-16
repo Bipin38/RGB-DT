@@ -1,0 +1,107 @@
+{
+  "description": "",
+  "ambient_temp_c": null,
+  "lighting": "dark",
+  "scene_type": "kitchen",
+  "thermal_scene_min_c": 25.956695556640625,
+  "thermal_scene_max_c": 69.23565673828125,
+  "thermal_scene_mean_c": 27.955312728881836,
+  "kitchen_id": "kitchen_004",
+  "capture_id": "",
+  "scene_hazard_label": "HAZARD",
+  "scene_hazard_tier": "CRITICAL",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "class": "microwave",
+      "object_class": "microwave",
+      "object_state": "ON",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 264,
+        "y_min": 147,
+        "x_max": 456,
+        "y_max": 254
+      },
+      "temp_min_c": 27.530548095703125,
+      "temp_mean_c": 29.81584930419922,
+      "temp_max_c": 44.77337646484375,
+      "temp_delta_c": 18.816680908203125,
+      "max_temp": 44.77337646484375,
+      "median_depth_meters": 1.6194769027452014,
+      "polygon_original": [
+        {
+          "x": 264,
+          "y": 154
+        },
+        {
+          "x": 456,
+          "y": 147
+        },
+        {
+          "x": 454,
+          "y": 252
+        },
+        {
+          "x": 267,
+          "y": 254
+        }
+      ],
+      "annotation_id": "e59f978f-a648-40e2-b1d9-f6ca5fd1cf3a",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "refrigerator",
+      "object_class": "refrigerator",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 97,
+        "y_min": 5,
+        "x_max": 256,
+        "y_max": 671
+      },
+      "temp_min_c": 26.615814208984375,
+      "temp_mean_c": 27.481462478637695,
+      "temp_max_c": 29.775726318359375,
+      "temp_delta_c": 3.81903076171875,
+      "max_temp": 29.775726318359375,
+      "median_depth_meters": 1.311547841796424,
+      "polygon_original": [
+        {
+          "x": 97,
+          "y": 5
+        },
+        {
+          "x": 189,
+          "y": 5
+        },
+        {
+          "x": 256,
+          "y": 657
+        },
+        {
+          "x": 97,
+          "y": 671
+        }
+      ],
+      "annotation_id": "1cf84891-26f2-476e-be43-e2be12405c6f",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    }
+  ],
+  "completed": true
+}

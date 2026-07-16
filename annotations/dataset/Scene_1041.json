@@ -1,0 +1,63 @@
+{
+  "description": "",
+  "ambient_temp_c": null,
+  "lighting": "dark",
+  "scene_type": "kitchen",
+  "thermal_scene_min_c": 25.612213134765625,
+  "thermal_scene_max_c": 68.78485107421875,
+  "thermal_scene_mean_c": 27.639514923095703,
+  "kitchen_id": "kitchen_004",
+  "capture_id": "",
+  "scene_hazard_label": "HAZARD",
+  "scene_hazard_tier": "CRITICAL",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "class": "microwave",
+      "object_class": "microwave",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 255,
+        "y_min": 166,
+        "x_max": 433,
+        "y_max": 256
+      },
+      "temp_min_c": 27.20306396484375,
+      "temp_mean_c": 30.400497436523438,
+      "temp_max_c": 49.83251953125,
+      "temp_delta_c": 24.220306396484375,
+      "max_temp": 49.83251953125,
+      "median_depth_meters": 1.1409809692894917,
+      "polygon_original": [
+        {
+          "x": 255,
+          "y": 167
+        },
+        {
+          "x": 256,
+          "y": 256
+        },
+        {
+          "x": 431,
+          "y": 245
+        },
+        {
+          "x": 433,
+          "y": 166
+        }
+      ],
+      "annotation_id": "79ec5da1-a0ed-4aa6-83b7-ff63cbf5726a",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    }
+  ],
+  "completed": true
+}

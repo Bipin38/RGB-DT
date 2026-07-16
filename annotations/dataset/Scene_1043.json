@@ -1,0 +1,283 @@
+{
+  "description": "",
+  "ambient_temp_c": null,
+  "lighting": "dark",
+  "scene_type": "kitchen",
+  "thermal_scene_min_c": 24.048370361328125,
+  "thermal_scene_max_c": 61.486572265625,
+  "thermal_scene_mean_c": 27.40712547302246,
+  "kitchen_id": "kitchen_004",
+  "capture_id": "",
+  "scene_hazard_label": "HAZARD",
+  "scene_hazard_tier": "CRITICAL",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "class": "stove_burner",
+      "object_class": "stove_burner",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 629,
+        "y_min": 333,
+        "x_max": 729,
+        "y_max": 370
+      },
+      "temp_min_c": 28.935394287109375,
+      "temp_mean_c": 30.367130279541016,
+      "temp_max_c": 31.397979736328125,
+      "temp_delta_c": 7.349609375,
+      "max_temp": 31.397979736328125,
+      "median_depth_meters": 1.4101467318661867,
+      "polygon_original": [
+        {
+          "x": 655,
+          "y": 367
+        },
+        {
+          "x": 681,
+          "y": 370
+        },
+        {
+          "x": 704,
+          "y": 368
+        },
+        {
+          "x": 723,
+          "y": 366
+        },
+        {
+          "x": 729,
+          "y": 347
+        },
+        {
+          "x": 694,
+          "y": 340
+        },
+        {
+          "x": 667,
+          "y": 333
+        },
+        {
+          "x": 645,
+          "y": 337
+        },
+        {
+          "x": 629,
+          "y": 350
+        }
+      ],
+      "annotation_id": "56ce01df-fb48-4ee3-8d68-c3194681b9bc",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "stove_burner",
+      "object_class": "stove_burner",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 711,
+        "y_min": 407,
+        "x_max": 796,
+        "y_max": 468
+      },
+      "temp_min_c": 30.022491455078125,
+      "temp_mean_c": 36.656986236572266,
+      "temp_max_c": 41.748382568359375,
+      "temp_delta_c": 17.70001220703125,
+      "max_temp": 41.748382568359375,
+      "median_depth_meters": 1.2929300943658184,
+      "polygon_original": [
+        {
+          "x": 711,
+          "y": 420
+        },
+        {
+          "x": 727,
+          "y": 407
+        },
+        {
+          "x": 748,
+          "y": 408
+        },
+        {
+          "x": 787,
+          "y": 408
+        },
+        {
+          "x": 796,
+          "y": 468
+        },
+        {
+          "x": 759,
+          "y": 457
+        },
+        {
+          "x": 732,
+          "y": 447
+        },
+        {
+          "x": 716,
+          "y": 431
+        }
+      ],
+      "annotation_id": "a3609e84-cc6d-49f9-b4af-85894f3035cf",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "stove_burner",
+      "object_class": "stove_burner",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 746,
+        "y_min": 330,
+        "x_max": 797,
+        "y_max": 367
+      },
+      "temp_min_c": 28.70648193359375,
+      "temp_mean_c": 30.875261306762695,
+      "temp_max_c": 33.1522216796875,
+      "temp_delta_c": 9.103851318359375,
+      "max_temp": 33.1522216796875,
+      "median_depth_meters": 1.4107889837814043,
+      "polygon_original": [
+        {
+          "x": 746,
+          "y": 338
+        },
+        {
+          "x": 769,
+          "y": 331
+        },
+        {
+          "x": 793,
+          "y": 330
+        },
+        {
+          "x": 797,
+          "y": 367
+        },
+        {
+          "x": 768,
+          "y": 362
+        },
+        {
+          "x": 755,
+          "y": 354
+        }
+      ],
+      "annotation_id": "68add641-4690-4521-95d3-a9942477adf0",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "microwave",
+      "object_class": "microwave",
+      "object_state": "ON",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 293,
+        "y_min": 163,
+        "x_max": 396,
+        "y_max": 217
+      },
+      "temp_min_c": 27.217926025390625,
+      "temp_mean_c": 29.57755470275879,
+      "temp_max_c": 44.940032958984375,
+      "temp_delta_c": 20.89166259765625,
+      "max_temp": 44.940032958984375,
+      "median_depth_meters": 1.4421961857954928,
+      "polygon_original": [
+        {
+          "x": 293,
+          "y": 167
+        },
+        {
+          "x": 296,
+          "y": 217
+        },
+        {
+          "x": 395,
+          "y": 214
+        },
+        {
+          "x": 396,
+          "y": 163
+        }
+      ],
+      "annotation_id": "0127484b-a11b-46ec-9677-0a325ee0727c",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "refrigerator",
+      "object_class": "refrigerator",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 99,
+        "y_min": 2,
+        "x_max": 282,
+        "y_max": 475
+      },
+      "temp_min_c": 25.887176513671875,
+      "temp_mean_c": 26.74181365966797,
+      "temp_max_c": 29.229644775390625,
+      "temp_delta_c": 5.1812744140625,
+      "max_temp": 29.229644775390625,
+      "median_depth_meters": 1.5510063235146292,
+      "polygon_original": [
+        {
+          "x": 99,
+          "y": 3
+        },
+        {
+          "x": 99,
+          "y": 475
+        },
+        {
+          "x": 282,
+          "y": 470
+        },
+        {
+          "x": 251,
+          "y": 2
+        }
+      ],
+      "annotation_id": "2dd09666-5d69-401f-ab40-b6df29e4c0d5",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    }
+  ],
+  "completed": true
+}
