@@ -1,0 +1,87 @@
+{
+  "description": "",
+  "ambient_temp_c": null,
+  "lighting": "dark",
+  "scene_type": "kitchen",
+  "thermal_scene_min_c": 24.406097412109375,
+  "thermal_scene_max_c": 74.51962280273438,
+  "thermal_scene_mean_c": 28.79599952697754,
+  "kitchen_id": "kitchen_004",
+  "capture_id": "",
+  "scene_hazard_label": "HAZARD",
+  "scene_hazard_tier": "CRITICAL",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "class": "stove_burner",
+      "object_class": "stove_burner",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 642,
+        "y_min": 553,
+        "x_max": 789,
+        "y_max": 632
+      },
+      "temp_min_c": 29.88421630859375,
+      "temp_mean_c": 34.274173736572266,
+      "temp_max_c": 36.949676513671875,
+      "temp_delta_c": 12.5435791015625,
+      "max_temp": 36.949676513671875,
+      "median_depth_meters": 0.9730668769502974,
+      "polygon_original": [
+        {
+          "x": 642,
+          "y": 569
+        },
+        {
+          "x": 659,
+          "y": 558
+        },
+        {
+          "x": 700,
+          "y": 554
+        },
+        {
+          "x": 733,
+          "y": 553
+        },
+        {
+          "x": 768,
+          "y": 567
+        },
+        {
+          "x": 789,
+          "y": 591
+        },
+        {
+          "x": 783,
+          "y": 623
+        },
+        {
+          "x": 743,
+          "y": 632
+        },
+        {
+          "x": 675,
+          "y": 625
+        },
+        {
+          "x": 643,
+          "y": 606
+        }
+      ],
+      "annotation_id": "04c825b4-2a7b-489c-b94d-fcc6e464e863",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    }
+  ],
+  "completed": true
+}

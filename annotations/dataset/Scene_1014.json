@@ -1,12 +1,12 @@
 {
   "description": "",
   "ambient_temp_c": null,
-  "lighting": "well_lit",
+  "lighting": "dark",
   "scene_type": "kitchen",
   "thermal_scene_min_c": 23.199432373046875,
   "thermal_scene_max_c": 30.51220703125,
   "thermal_scene_mean_c": 26.51078987121582,
-  "kitchen_id": "kitchen_001",
+  "kitchen_id": "kitchen_004",
   "capture_id": "",
   "scene_hazard_label": "SAFE",
   "scene_hazard_tier": "SAFE",
@@ -15,28 +15,74 @@
   "qa_pairs": [],
   "annotations": [
     {
-      "class": "stove_burner",
-      "object_class": "stove_burner",
-      "object_state": "UNKNOWN",
-      "object_hazard_label": "UNKNOWN",
-      "object_hazard_tier": "UNKNOWN",
+      "class": "kettle",
+      "object_class": "kettle",
+      "object_state": "ON",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
       "is_contextual": false,
       "region_caption": "",
       "spatial_relations": [],
-      "shape": "rectangle",
+      "shape": "polygon",
       "bbox_original": {
-        "x_min": 294,
-        "y_min": 60,
-        "x_max": 450,
-        "y_max": 266
+        "x_min": 309,
+        "y_min": 109,
+        "x_max": 412,
+        "y_max": 239
       },
-      "temp_min_c": 23.88458251953125,
-      "temp_mean_c": 26.395599365234375,
-      "temp_max_c": 30.51220703125,
-      "temp_delta_c": 7.312774658203125,
-      "max_temp": 30.51220703125,
-      "median_depth_meters": 1.221808545599822,
-      "annotation_id": "a459b64a-c6c3-46cf-acf1-d3129a231f04",
+      "temp_min_c": 24.2562255859375,
+      "temp_mean_c": 25.84624671936035,
+      "temp_max_c": 27.407989501953125,
+      "temp_delta_c": 4.20855712890625,
+      "max_temp": 27.407989501953125,
+      "median_depth_meters": 1.2251643392517875,
+      "polygon_original": [
+        {
+          "x": 314,
+          "y": 109
+        },
+        {
+          "x": 309,
+          "y": 211
+        },
+        {
+          "x": 322,
+          "y": 226
+        },
+        {
+          "x": 346,
+          "y": 237
+        },
+        {
+          "x": 371,
+          "y": 239
+        },
+        {
+          "x": 391,
+          "y": 234
+        },
+        {
+          "x": 412,
+          "y": 226
+        },
+        {
+          "x": 398,
+          "y": 131
+        },
+        {
+          "x": 384,
+          "y": 126
+        },
+        {
+          "x": 354,
+          "y": 128
+        },
+        {
+          "x": 334,
+          "y": 119
+        }
+      ],
+      "annotation_id": "51868396-6c31-4047-b019-583014115ba8",
       "hazard_tier": "UNKNOWN",
       "instance_id": ""
     }

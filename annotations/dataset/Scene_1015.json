@@ -1,0 +1,87 @@
+{
+  "description": "",
+  "ambient_temp_c": null,
+  "lighting": "dark",
+  "scene_type": "kitchen",
+  "thermal_scene_min_c": 23.501495361328125,
+  "thermal_scene_max_c": 34.57415771484375,
+  "thermal_scene_mean_c": 26.71500015258789,
+  "kitchen_id": "kitchen_004",
+  "capture_id": "",
+  "scene_hazard_label": "SAFE",
+  "scene_hazard_tier": "SAFE",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "class": "kettle",
+      "object_class": "kettle",
+      "object_state": "ON",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 340,
+        "y_min": 129,
+        "x_max": 410,
+        "y_max": 214
+      },
+      "temp_min_c": 24.7611083984375,
+      "temp_mean_c": 25.961259841918945,
+      "temp_max_c": 27.331695556640625,
+      "temp_delta_c": 3.8302001953125,
+      "max_temp": 27.331695556640625,
+      "median_depth_meters": 1.6666195986397916,
+      "polygon_original": [
+        {
+          "x": 350,
+          "y": 129
+        },
+        {
+          "x": 340,
+          "y": 201
+        },
+        {
+          "x": 350,
+          "y": 209
+        },
+        {
+          "x": 367,
+          "y": 213
+        },
+        {
+          "x": 385,
+          "y": 214
+        },
+        {
+          "x": 403,
+          "y": 212
+        },
+        {
+          "x": 410,
+          "y": 207
+        },
+        {
+          "x": 407,
+          "y": 132
+        },
+        {
+          "x": 392,
+          "y": 137
+        },
+        {
+          "x": 366,
+          "y": 137
+        }
+      ],
+      "annotation_id": "3c6f3d05-b473-40d8-bc99-97b5d8df61f3",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    }
+  ],
+  "completed": true
+}
