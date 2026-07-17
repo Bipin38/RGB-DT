@@ -1,0 +1,391 @@
+{
+  "description": "",
+  "ambient_temp_c": null,
+  "lighting": "well_lit",
+  "scene_type": "kitchen",
+  "thermal_scene_min_c": 20.519195556640625,
+  "thermal_scene_max_c": 78.70217895507812,
+  "thermal_scene_mean_c": 23.423776626586914,
+  "kitchen_id": "kitchen_003",
+  "capture_id": "",
+  "scene_hazard_label": "HAZARD",
+  "scene_hazard_tier": "CRITICAL",
+  "annotator_id": "",
+  "scene_caption": "",
+  "qa_pairs": [],
+  "annotations": [
+    {
+      "class": "oven_door",
+      "object_class": "oven_door",
+      "object_state": "OFF",
+      "object_hazard_label": "SAFE",
+      "object_hazard_tier": "SAFE",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 235,
+        "y_min": 187,
+        "x_max": 381,
+        "y_max": 630
+      },
+      "temp_min_c": 21.68109130859375,
+      "temp_mean_c": 22.301044464111328,
+      "temp_max_c": 23.687896728515625,
+      "temp_delta_c": 3.168701171875,
+      "max_temp": 23.687896728515625,
+      "median_depth_meters": 0.0,
+      "polygon_original": [
+        {
+          "x": 235,
+          "y": 187
+        },
+        {
+          "x": 366,
+          "y": 288
+        },
+        {
+          "x": 381,
+          "y": 630
+        },
+        {
+          "x": 267,
+          "y": 459
+        }
+      ],
+      "annotation_id": "6190db4a-8325-4422-b1ee-27a830982ca9",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "oven_door",
+      "object_class": "oven_door",
+      "object_state": "ON",
+      "object_hazard_label": "HAZARD",
+      "object_hazard_tier": "LOW",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 357,
+        "y_min": 206,
+        "x_max": 453,
+        "y_max": 250
+      },
+      "temp_min_c": 23.187225341796875,
+      "temp_mean_c": 26.215608596801758,
+      "temp_max_c": 31.0673828125,
+      "temp_delta_c": 10.548187255859375,
+      "max_temp": 31.0673828125,
+      "median_depth_meters": 0.0,
+      "polygon_original": [
+        {
+          "x": 397,
+          "y": 206
+        },
+        {
+          "x": 368,
+          "y": 215
+        },
+        {
+          "x": 357,
+          "y": 225
+        },
+        {
+          "x": 370,
+          "y": 247
+        },
+        {
+          "x": 399,
+          "y": 250
+        },
+        {
+          "x": 430,
+          "y": 248
+        },
+        {
+          "x": 452,
+          "y": 238
+        },
+        {
+          "x": 453,
+          "y": 223
+        },
+        {
+          "x": 436,
+          "y": 211
+        }
+      ],
+      "annotation_id": "bd4fda97-5d15-431d-b26c-56f00fa390cc",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "oven_door",
+      "object_class": "oven_door",
+      "object_state": "ON",
+      "object_hazard_label": "HAZARD",
+      "object_hazard_tier": "CRITICAL",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 444,
+        "y_min": 183,
+        "x_max": 560,
+        "y_max": 222
+      },
+      "temp_min_c": 26.297576904296875,
+      "temp_mean_c": 53.33378219604492,
+      "temp_max_c": 78.70217895507812,
+      "temp_delta_c": 58.1829833984375,
+      "max_temp": 78.70217895507812,
+      "median_depth_meters": 0.0,
+      "polygon_original": [
+        {
+          "x": 485,
+          "y": 183
+        },
+        {
+          "x": 462,
+          "y": 184
+        },
+        {
+          "x": 444,
+          "y": 196
+        },
+        {
+          "x": 452,
+          "y": 214
+        },
+        {
+          "x": 469,
+          "y": 221
+        },
+        {
+          "x": 499,
+          "y": 222
+        },
+        {
+          "x": 528,
+          "y": 222
+        },
+        {
+          "x": 555,
+          "y": 211
+        },
+        {
+          "x": 560,
+          "y": 202
+        },
+        {
+          "x": 549,
+          "y": 190
+        },
+        {
+          "x": 520,
+          "y": 187
+        }
+      ],
+      "annotation_id": "1ecdc564-955c-412a-b669-a65c3ed2108c",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "oven_door",
+      "object_class": "oven_door",
+      "object_state": "ON",
+      "object_hazard_label": "HAZARD",
+      "object_hazard_tier": "CRITICAL",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 381,
+        "y_min": 138,
+        "x_max": 451,
+        "y_max": 162
+      },
+      "temp_min_c": 26.314422607421875,
+      "temp_mean_c": 35.48057174682617,
+      "temp_max_c": 57.44683837890625,
+      "temp_delta_c": 36.927642822265625,
+      "max_temp": 57.44683837890625,
+      "median_depth_meters": 0.0,
+      "polygon_original": [
+        {
+          "x": 414,
+          "y": 138
+        },
+        {
+          "x": 394,
+          "y": 140
+        },
+        {
+          "x": 381,
+          "y": 147
+        },
+        {
+          "x": 390,
+          "y": 162
+        },
+        {
+          "x": 413,
+          "y": 162
+        },
+        {
+          "x": 437,
+          "y": 160
+        },
+        {
+          "x": 451,
+          "y": 155
+        },
+        {
+          "x": 449,
+          "y": 144
+        },
+        {
+          "x": 439,
+          "y": 140
+        }
+      ],
+      "annotation_id": "560b832e-f2ed-4242-926a-a41bb53c39ae",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "oven_door",
+      "object_class": "oven_door",
+      "object_state": "ON",
+      "object_hazard_label": "HAZARD",
+      "object_hazard_tier": "HIGH",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 280,
+        "y_min": 150,
+        "x_max": 388,
+        "y_max": 189
+      },
+      "temp_min_c": 24.8201904296875,
+      "temp_mean_c": 33.995521545410156,
+      "temp_max_c": 48.9732666015625,
+      "temp_delta_c": 28.454071044921875,
+      "max_temp": 48.9732666015625,
+      "median_depth_meters": 0.0,
+      "polygon_original": [
+        {
+          "x": 322,
+          "y": 151
+        },
+        {
+          "x": 292,
+          "y": 159
+        },
+        {
+          "x": 280,
+          "y": 167
+        },
+        {
+          "x": 284,
+          "y": 183
+        },
+        {
+          "x": 307,
+          "y": 189
+        },
+        {
+          "x": 344,
+          "y": 189
+        },
+        {
+          "x": 370,
+          "y": 181
+        },
+        {
+          "x": 388,
+          "y": 167
+        },
+        {
+          "x": 369,
+          "y": 160
+        },
+        {
+          "x": 345,
+          "y": 150
+        }
+      ],
+      "annotation_id": "8c943df7-d3c0-41eb-b634-399b4687a849",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    },
+    {
+      "class": "oven_door",
+      "object_class": "oven_door",
+      "object_state": "ON",
+      "object_hazard_label": "HAZARD",
+      "object_hazard_tier": "HIGH",
+      "is_contextual": false,
+      "region_caption": "",
+      "spatial_relations": [],
+      "shape": "polygon",
+      "bbox_original": {
+        "x_min": 606,
+        "y_min": 468,
+        "x_max": 797,
+        "y_max": 793
+      },
+      "temp_min_c": 20.519195556640625,
+      "temp_mean_c": 22.458044052124023,
+      "temp_max_c": 23.145721435546875,
+      "temp_delta_c": 2.62652587890625,
+      "max_temp": 23.145721435546875,
+      "median_depth_meters": 0.0,
+      "polygon_original": [
+        {
+          "x": 657,
+          "y": 503
+        },
+        {
+          "x": 728,
+          "y": 473
+        },
+        {
+          "x": 797,
+          "y": 468
+        },
+        {
+          "x": 797,
+          "y": 793
+        },
+        {
+          "x": 608,
+          "y": 791
+        },
+        {
+          "x": 610,
+          "y": 606
+        },
+        {
+          "x": 606,
+          "y": 572
+        },
+        {
+          "x": 620,
+          "y": 555
+        }
+      ],
+      "annotation_id": "f1112dcb-1f0f-4581-b1fe-91ecea320f14",
+      "hazard_tier": "UNKNOWN",
+      "instance_id": ""
+    }
+  ],
+  "completed": true
+}
